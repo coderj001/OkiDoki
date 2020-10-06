@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>OkiDoki - {%block title%}{%endblock title%}</title>
+    <title>OkiDoki - {%block title%}Home Page{%endblock title%}</title>
     <link rel="stylesheet" href="{%static 'css/bulma.min.css'%}">
 </head>
 <body>
     <!-- Nav -->
     <nav class="navbar is-info" role="navigation">
         <div class="navbar-brand">
-            <a href="#" class="navbar-item"><strong>OkiDoki</strong></a>
+            <a href="{%url 'core:frontpage'%}" class="navbar-item"><strong>OkiDoki</strong></a>
             <a class="navbar-burgar" href="#">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -22,7 +22,7 @@
     <!-- End Nav -->
 
     <!-- Content -->
-    <section class="content">
+    <section class="section">
         {%block content%}
         {%endblock content%}
     </section>

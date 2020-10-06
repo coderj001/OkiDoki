@@ -1,8 +1,8 @@
 from django.urls import path, include
-from core.views import demo
+from core.views import frontpage
 
 app_name = "core"
 
 urlpatterns = [
-    path('demo/', demo, name="demo"),
+    path('', frontpage, name="frontpage"),
 ]

@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',
+    'user_profile',
 ]
 
 # Added Plugin
