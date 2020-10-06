@@ -4,10 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>OkiDoki - {%block content%}{%endblock title%}</title>
+    <title>OkiDoki - {%block title%}{%endblock title%}</title>
     <link rel="stylesheet" href="{%static 'css/bulma.min.css'%}">
 </head>
 <body>
+    <!-- Nav -->
+    <nav class="navbar is-info" role="navigation">
+        <div class="navbar-brand">
+            <a href="#" class="navbar-item"><strong>OkiDoki</strong></a>
+            <a class="navbar-burgar" href="#">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+    </nav>
+    <!-- End Nav -->
 
+    <!-- Content -->
+    <section class="content">
+        {%block content%}
+        {%endblock content%}
+    </section>
+    <!-- End Content -->
 </body>
 </html>
