@@ -1,5 +1,12 @@
 # OkiDoki - Twitter clone (Django & Vue.js)
 
+This a person project for learning django and vuejs.
+<br />
+-- Project Name: -- OkiDoki
+<br />
+-- Descriptions: -- This will be similar to twitter but dosn't contain all features of twitter.
+<br />
+
 ### Todos (List of features)
 - setup and create project
 - create folders for structurs and similar
