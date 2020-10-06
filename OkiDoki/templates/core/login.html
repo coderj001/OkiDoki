@@ -8,6 +8,11 @@
         <div class="columns">
             <div class="column is-12">
                 <h1 class="title">Log In</h1>
+                <form action="" method="post">
+                    {%csrf_token%}
+                    {{form}}
+                    <button class="button is-success" type="submit">Login In</button>
+                </form>
             </div>
         </div>
     </div>
