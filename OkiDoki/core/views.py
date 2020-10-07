@@ -33,8 +33,11 @@ def login_user(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('core:frontpage')
+            if user is not None:
+                login(request, user)
+                return redirect('core:frontpage')
+            else:
+                return render(request, 'core/login.html', {'form': form})
         else:
             return render(request, 'core/login.html', {'form': form})
     form = UserLoginForm()
