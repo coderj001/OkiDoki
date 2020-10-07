@@ -1,3 +1,7 @@
 from django.contrib import admin
+from feed.models import Oki
 
-# Register your models here.
+
+@admin.register(Oki)
+class OkiAdmin(admin.ModelAdmin):
+    pass

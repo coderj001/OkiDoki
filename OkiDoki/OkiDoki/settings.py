@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',
-    'user_profile',
+    'okir_profile',
     'feed',
 ]
 
