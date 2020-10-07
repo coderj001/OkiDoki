@@ -21,6 +21,7 @@ INSTALLED_APPS = [
 
     'core',
     'user_profile',
+    'feed',
 ]
 
 # Added Plugin

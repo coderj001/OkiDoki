@@ -19,4 +19,4 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError('Not password incorrect')
             if not user.is_active:
                 raise forms.ValidationError('plus valide')
-        return super(UserLoginForm, self).clean(*args, **kwargs)
+        return super().clean(*args, **kwargs)
