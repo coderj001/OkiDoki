@@ -1,66 +1,77 @@
 {%extends 'base.html'%}
-
 {%block title%}Feeds{%endblock title%}
-
-
 {%block content%}
-    <div class="container" id="feedapp">
-        <div class="columns">
-            <div class="columns is-12">
-                <div class="wrapper-form">
-                    <form action="" v-on:submit.prevent="submitOki">
-                        <div class="field">
-                            <div class="control is-medium is-loading">
-                                <textarea class="textarea is-medium is-primary" v-model="body" placeholder="Start With Oki"></textarea>
-                            </div>
+<div class="container" id="feedapp">
+    <div class="columns">
+        <div class="columns is-12">
+            <div class="wrapper-form">
+                <form action="" v-on:submit.prevent="submitOki">
+                    <div class="field">
+                        <div class="control is-medium is-loading">
+                            <textarea class="textarea is-medium is-primary" v-model="body" placeholder="Start With Oki"></textarea>
                         </div>
-                        <div class="field">
-                            <div class="control">
-                                <button class="button is-success is-medium">Post</button>
-                            </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success is-medium">Post</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-                <div class="wrapper-oki">
-                    <div class="oki" v-for="oki in okis">
-                        <p class="name"><strong>[[oki.okir]]</strong></p>
-                        <p>[[oki.body]]</p>
-                        <p class="is-info is-small">[[oki.created_at]]</p>
-                    </div>
-                </div>
     </div>
+    <div class="wrapper-oki">
+        <div class="oki" v-for="oki in okis">
+            <p class="name"><strong>[[oki.okir]]</strong></p>
+            <p>[[oki.body]]</p>
+            <p class="is-info is-small">[[oki.created_at]]</p>
+        </div>
+    </div>
+</div>
 {%endblock content%}
-
 {%block script%}
-    <script>
-        new Vue({
-            el: '#feedapp',
-            delimiters: ['[[',']]'],
-            data(){
-                return {
-                    okis: [],
-                    body: '',
-                    okir: '{{request.user.username}}',
-                    created_at: 'Now',
+<script>
+    new Vue({
+        el: "#feedapp",
+        delimiters: ["[[", "]]"],
+        data() {
+            return {
+                okis: [],
+                body: "",
+                okir: "{{request.user.username}}",
+                created_at: "Now",
+            };
+        },
+        methods: {
+            submitOki() {
+                console.log("submitOki");
+                if (this.body.length > 0) {
+                    var oki = {
+                        body: this.body,
+                        okir: this.okir,
+                        created_at: this.created_at,
+                    };
+                    this.okis.unshift(oki);
+                    // Send to backend
+                    fetch('{%url "feed:api_add_oki"%}', {
+                        method: "POST",
+                        header: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": "{{csrf_token}}",
+                        },
+                        credentials: "same-origin",
+                        body: JSON.stringify(oki),
+                    })
+                        .then((responce) => {
+                            console.log(responce);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
                 }
+                this.body = "";
             },
-            methods:{
-                submitOki(){
-                    console.log('submitOki')
-                    if(this.body.length>0){
-                        var oki={
-                            'body': this.body,
-                            'okir': this.okir,
-                            'created_at': this.created_at,
-                        };
-                        this.okis.unshift(oki);
-                        // Send to backend
-                    }
-                    this.body='';
-                }
-            }
-        })
-    </script>
+        },
+    });
+</script>
 {%endblock script%}
