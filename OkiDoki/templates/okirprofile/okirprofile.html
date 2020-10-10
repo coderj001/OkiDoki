@@ -9,7 +9,7 @@
         <div class="columns">
             <div class="column is-12">
                 <h1 class="title">{{user.username}}</h1>
-                <p>Followers: {{user.okirprofile.followed_by.count}}</p>
+                <p><a href="{% url 'okirprofile:followers' user.username%}">Followers</a>: {{user.okirprofile.followed_by.count}}</p>
                 <p>Follows: {{user.okirprofile.follows.count}}</p>
                 {%if user != request.user %}
                     {%if request.user.okirprofile in user.okirprofile.followed_by.all%}

@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{%load humanize%}
+{%block title%}Followers{%endblock%}
+{%block content%}
+<div class="container">
+    <div class="columns">
+        <div class="column is-12">
+            <h1 class="title">Followers - {{user.username}}</h1>
+            <p>{{followers.count}}</p>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-8">
+            <ol type="1">
+                {% for ok in user.okirprofile.followed_by.all %}
+                    <li><a href="{{ok.okir.okirprofile.get_profile_url}}">{{ok.okir.username}}</a></li>
+                    {%empty%}
+                        {%if request.user == user%}
+                            <li>Sorry, no one likes you. As you Have not follower.</li>
+                        {%else%}
+                            <li>Hey nobody likes him.</li>
+                        {%endif%}
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
+{%endblock%}

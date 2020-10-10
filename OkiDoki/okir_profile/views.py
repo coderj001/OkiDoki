@@ -26,3 +26,12 @@ def unfollow_okir(request, username):
     user = get_object_or_404(User, username=username)
     request.user.okirprofile.follows.remove(user.okirprofile)
     return redirect("okirprofile:okirprofile", username=username)
+
+
+@login_required(login_url=reverse_lazy('core:login'))
+def followers(request, username):
+    user = get_object_or_404(User, username=username)
+    context = {
+        'user': user,
+    }
+    return render(request, 'okirprofile/followers.html', context=context)

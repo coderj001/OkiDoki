@@ -18,9 +18,9 @@ This a person project for learning django and vuejs.
 - ~~create front page with some informations~~
 - ~~create login and signup page~~
 
-- create page for "my feed"
+- ~~create page for "my feed"~~
 - ~~make it possible to signout~~
-- make it possible to write an okidoki post (Vuejs - submit and append)
+- ~~make it possible to write an okidoki post (Vuejs - submit and append)~~
 - make it possible to search for okidoki posts and users
 - make it possible to follow an okidoki's user (Vuejs - send using ajax)
 - make it possible to see my followers / who I follow
