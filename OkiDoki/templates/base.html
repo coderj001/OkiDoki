@@ -24,7 +24,8 @@
                     {%if request.user.is_authenticated%}
                     <a href="{%url 'feed:feed'%}" class="navbar-item">Feeds</a>
                     <a href="{%url 'feed:search'%}" class="navbar-item">Search</a>
-                    <a href="{%url 'okirprofile:okirprofile' request.user.username%}" class="navbar-item">Profile</a>
+                    {# <a href="{%url 'okirprofile:okirprofile' request.user.username%}" class="navbar-item">Profile</a> #}
+                    <a href="{{request.user.okirprofile.get_profile_url}}" class="navbar-item">Profile</a>
                     {%endif%}
                     <div class="navbar-item">
                         <div class="buttons">

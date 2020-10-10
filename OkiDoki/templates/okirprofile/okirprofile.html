@@ -2,11 +2,22 @@
 
 {%load humanize%}
 
+{%block title%}Profile{%endblock%}
+
 {%block content%}
 <div class="container">
         <div class="columns">
             <div class="column is-12">
                 <h1 class="title">{{user.username}}</h1>
+                <p>Followers: {{user.okirprofile.followed_by.count}}</p>
+                <p>Follows: {{user.okirprofile.follows.count}}</p>
+                {%if user != request.user %}
+                    {%if request.user.okirprofile in user.okirprofile.followed_by.all%}
+                    <a href="{%url 'okirprofile:unfollow' user.username%}" class="button is-danger is-small">Unfollow</a>
+                    {%else%}
+                    <a href="{%url 'okirprofile:follow' user.username%}" class="button is-primary is-small">Follow</a>
+                    {%endif%}
+                {%endif%}
             </div>
         </div>
         <div class="columns">

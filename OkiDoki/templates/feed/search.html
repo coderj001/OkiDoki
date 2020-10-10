@@ -2,6 +2,8 @@
 
 {%load humanize%}
 
+{%block title%} Search {%endblock%}
+
 {%block content%}
     <div class="container">
         <div class="columns">
@@ -31,7 +33,7 @@
             <div class="search-result">
                 {%if okirs%}
                     {%for okir in okirs%}
-                        <p>{{okir.username}}</p>
+                        <a href="{{okir.okirprofile.get_profile_url}}">{{okir.username}}</a>
                     {%endfor%}
                 {%endif%}
             </div>

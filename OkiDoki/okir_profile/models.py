@@ -15,8 +15,11 @@ class OkirProfile(models.Model):
         return f"{self.id}"
 
     def get_profile_url(self):
-        # TODO: Not Working
-        return reverse("okirprofile:okirprofile", kwargs={self.okir.username})
+        return reverse("okirprofile:okirprofile", kwargs={'username': self.okir.username})
+
+    # TODO: Try creating abs url for follow and unfollow
+    # def get_follow_url(self):
+    #     return reverse("okirprofile:follow", kwargs={'username': self.okir.username})
 
 
 User.okirprofile = property(
