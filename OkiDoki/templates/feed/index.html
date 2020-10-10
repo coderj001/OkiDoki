@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{%load humanize%}
 {%block title%}Feeds{%endblock title%}
 {%block content%}
 <div class="container" id="feedapp">
@@ -26,6 +27,15 @@
             <p>[[oki.body]]</p>
             <p class="is-info is-small">[[oki.created_at]]</p>
         </div>
+        {%if okis%}
+            {%for oki in okis%}
+                <div class="oki">
+                    <p class="name"><strong>{{oki.created_by.username}}</strong></p>
+                    <p>{{oki.body|safe}}</p>
+                    <p class="is-info is-small">{{oki.created_at|naturaltime}}</p>
+                </div>
+            {%endfor%}
+        {%endif%}
     </div>
 </div>
 {%endblock content%}
