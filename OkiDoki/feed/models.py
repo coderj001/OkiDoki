@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Oki(models.Model):
     body = models.CharField(max_length=255, blank=False)
     created_by = models.ForeignKey(
-        User, related_name="Okir_name", on_delete=models.CASCADE)
+        User, related_name="okir", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

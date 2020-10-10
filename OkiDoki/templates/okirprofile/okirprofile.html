@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%load humanize%}
+
+{%block content%}
+<div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title">{{user.username}}</h1>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-12">
+                <div class="wrapper-okis">
+                    {%for oki in user.okir.all%}
+                        <div class="oki">
+                            <p class="name"><strong>{{oki.created_by.username}}</strong></p>
+                            <p class="">{{oki.body|safe}}</p>
+                            <p class="info">{{oki.created_at|naturaltime}}</p>
+                        </div>
+                        <hr>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock content%}

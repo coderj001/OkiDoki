@@ -35,7 +35,10 @@ def login_user(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('core:frontpage')
+                try:
+                    return redirect(request.GET['next'])
+                except:
+                    return redirect('core:frontpage')
             else:
                 return render(request, 'core/login.html', {'form': form})
         else:

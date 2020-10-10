@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+
+{%load humanize%}
+
+{%block content%}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title">Search</h1>
+                {%if query%}
+                <p>Search Term: "{{query}}"</p>
+                {%endif%}
+                <hr>
+                <form action="{%url 'feed:search'%}" method="get">
+                    <div class="field">
+                        <div class="control">
+                            <input type="text" class="input" name="query" value="{{query}}">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {%comment%}
+            comment
+        {%endcomment%}
+            <div class="search-result">
+                {%if okirs%}
+                    {%for okir in okirs%}
+                        <p>{{okir.username}}</p>
+                    {%endfor%}
+                {%endif%}
+            </div>
+    </div>
+{%endblock content%}
