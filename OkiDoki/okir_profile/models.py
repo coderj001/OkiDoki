@@ -7,6 +7,8 @@ class OkirProfile(models.Model):
     okir = models.OneToOneField(User, on_delete=models.CASCADE)
     follows = models.ManyToManyField(
         'self', related_name='followed_by', symmetrical=False)
+    avatar = models.ImageField(
+        upload_to="profile_pic/", default="default_profile_pic.png")
 
     def __str__(self):
         return f"{self.okir}'s profile"
@@ -17,9 +19,11 @@ class OkirProfile(models.Model):
     def get_profile_url(self):
         return reverse("okirprofile:okirprofile", kwargs={'username': self.okir.username})
 
-    # TODO: Try creating abs url for follow and unfollow
-    # def get_follow_url(self):
-    #     return reverse("okirprofile:follow", kwargs={'username': self.okir.username})
+    def get_follow_url(self):
+        return reverse("okirprofile:follow", kwargs={'username': self.okir.username})
+
+    def get_unfollow_url(self):
+        return reverse("okirprofile:unfollow", kwargs={'username': self.okir.username})
 
 
 User.okirprofile = property(

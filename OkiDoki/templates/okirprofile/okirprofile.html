@@ -10,14 +10,25 @@
             <div class="column is-12">
                 <h1 class="title">{{user.username}}</h1>
                 <p><a href="{% url 'okirprofile:followers' user.username%}">Followers</a>: {{user.okirprofile.followed_by.count}}</p>
-                <p>Follows: {{user.okirprofile.follows.count}}</p>
+                <p><a href="{% url 'okirprofile:follows' user.username%}">Follows</a>: {{user.okirprofile.follows.count}}</p>
                 {%if user != request.user %}
                     {%if request.user.okirprofile in user.okirprofile.followed_by.all%}
                     <a href="{%url 'okirprofile:unfollow' user.username%}" class="button is-danger is-small">Unfollow</a>
+                    {# <a href="{{user.okirprofile.get_follow_url}}" class="button is-danger is-small">Unfollow</a> #}
                     {%else%}
                     <a href="{%url 'okirprofile:follow' user.username%}" class="button is-primary is-small">Follow</a>
+                    {# <a href="{{user.okirprofile.get_unfollow_url}}" class="button is-primary is-small">Follow</a> #}
                     {%endif%}
                 {%endif%}
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-12">
+                <div class="wrapper-okis">
+                    {%if user == request.user%}
+                        <a href="{%url 'okirprofile:editprofileview' %}" class="button is-primary is-large">Edit</a>
+                    {%endif%}
+                </div>
             </div>
         </div>
         <div class="columns">
