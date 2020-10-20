@@ -9,6 +9,9 @@
         <div class="columns">
             <div class="column is-12">
                 <h1 class="title">{{user.username}}</h1>
+                {%if user.okirprofile.avatar%}
+                    <img src="{{user.okirprofile.avatar.url}}" alt="Profile Picture">
+                {%endif%}
                 <p><a href="{% url 'okirprofile:followers' user.username%}">Followers</a>: {{user.okirprofile.followed_by.count}}</p>
                 <p><a href="{% url 'okirprofile:follows' user.username%}">Follows</a>: {{user.okirprofile.follows.count}}</p>
                 {%if user != request.user %}

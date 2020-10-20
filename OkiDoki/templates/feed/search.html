@@ -33,7 +33,7 @@
             <div class="search-result">
                 {%if okirs%}
                     {%for okir in okirs%}
-                        <a href="{{okir.okirprofile.get_profile_url}}">{{okir.username}}</a>
+                        <p><a href="{{okir.okirprofile.get_profile_url}}">{{okir.username}}</a></p>
                     {%endfor%}
                 {%endif%}
             </div>
