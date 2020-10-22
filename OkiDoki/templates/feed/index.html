@@ -22,35 +22,44 @@
         </div>
     </div>
     <div class="wrapper-oki">
+        {# For vue js #}
         <div class="oki" v-for="oki in okis">
-            <p class="name"><strong>[[oki.okir]]</strong></p>
-            <p>[[oki.body]]</p>
-            <p class="is-info is-small">[[oki.created_at]]</p>
-        </div>
-        {%if okis%}
-            {%for oki in okis%}
-                <div class="oki">
-                    <article class="media">
-                        <figure class="media-left">
-                            <p class="image is-64x64">
-                            {%if oki.created_by.okirprofile.avatar%}
-                                <img src="{{oki.created_by.okirprofile.avatar.url}}" alt="Profile Picture">
-                            {%endif%}
-                            </p>
-                        </figure>
-                        <div class="media-conten">
-                            <p class="name"><strong>{{oki.created_by.username}}</strong></p>
-                            <p class="">{{oki.body|safe}}</p>
-                            <p class="info">{{oki.created_at|naturaltime}}</p>
-                        </div>
-                    </article>
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                        <img :src="oki.avatar" alt="Profile Picture" />
+                    </p>
+                </figure>
+                <div class="media-conten">
+                    <p class="name"><strong>[[oki.okir]]</strong></p>
+                    <p class="">[[oki.body]]</p>
+                    <p class="info">[[oki.created_at]]</p>
                 </div>
-            {%endfor%}
-        {%endif%}
+            </article>
+        </div>
+        {# For Djano Templates #}
+        {%if okis%}
+        {%for oki in okis%}
+        <div class="oki">
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                        {%if oki.created_by.okirprofile.avatar%}
+                            <img src="{{oki.created_by.okirprofile.avatar.url}}" alt="Profile Picture" />
+                        {%endif%}
+                    </p>
+                </figure>
+                <div class="media-conten">
+                    <p class="name"><strong>{{oki.created_by.username}}</strong></p>
+                    <p class="">{{oki.body|safe}}</p>
+                    <p class="info">{{oki.created_at|naturaltime}}</p>
+                </div>
+            </article>
+        </div>
+        {%endfor%} {%endif%}
     </div>
 </div>
-{%endblock content%}
-{%block script%}
+{%endblock content%} {%block script%}
 <script>
     new Vue({
         el: "#feedapp",
@@ -61,6 +70,7 @@
                 body: "",
                 okir: "{{request.user.username}}",
                 created_at: "Now",
+                avatar: {%if request.user.okirprofile.avatar%}"{{request.user.okirprofile.avatar.url}}"{%endif%}
             };
         },
         methods: {
@@ -71,9 +81,10 @@
                         body: this.body,
                         okir: this.okir,
                         created_at: this.created_at,
+                        avatar: this.avatar,
                     };
                     this.okis.unshift(oki);
-                    // Send to backend
+                     {# Send to backend #}
                     fetch('{%url "feed:api_add_oki"%}', {
                         method: "POST",
                         header: {
@@ -84,6 +95,7 @@
                         body: JSON.stringify(oki),
                     })
                         .then((responce) => {
+                            {# TODO: Remove console.log on production #}
                             console.log(responce);
                         })
                         .catch((err) => {

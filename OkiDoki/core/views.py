@@ -5,6 +5,7 @@ from core.forms import UserLoginForm
 
 
 def frontpage(request):
+    """For rendering frontpage"""
     return render(request, 'core/frontpage.html', {})
 
 
