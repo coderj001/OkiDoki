@@ -32,4 +32,4 @@ This a person project for learning django and vuejs.
 - Make it possible to see a conversation
 - Make it possible to send a direct message (Vue.js - submit and append)
 
-- Deploy to a server
+- Deploy to a server (Heroku)

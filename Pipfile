@@ -17,6 +17,7 @@ django-debug-toolbar = "*"
 django = "==3.0.7"
 django-extensions = "*"
 pillow = "*"
+django-ckeditor = "*"
 
 [requires]
 python_version = "3.8"

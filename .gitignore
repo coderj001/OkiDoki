@@ -156,3 +156,4 @@ migrations/
 .vim/
 .env
 tags
+static/

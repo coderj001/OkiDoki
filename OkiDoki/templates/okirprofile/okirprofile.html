@@ -10,7 +10,9 @@
             <div class="column is-12">
                 <h1 class="title">{{user.username}}</h1>
                 {%if user.okirprofile.avatar%}
-                    <img src="{{user.okirprofile.avatar.url}}" alt="Profile Picture">
+                    <figure class="image is-128x128">
+                        <img src="{{user.okirprofile.avatar.url}}" alt="Profile Picture">
+                    </figure>
                 {%endif%}
                 <p><a href="{% url 'okirprofile:followers' user.username%}">Followers</a>: {{user.okirprofile.followed_by.count}}</p>
                 <p><a href="{% url 'okirprofile:follows' user.username%}">Follows</a>: {{user.okirprofile.follows.count}}</p>
@@ -34,14 +36,26 @@
                 </div>
             </div>
         </div>
+        <hr />
         <div class="columns">
             <div class="column is-12">
                 <div class="wrapper-okis">
                     {%for oki in user.okir.all%}
                         <div class="oki">
-                            <p class="name"><strong>{{oki.created_by.username}}</strong></p>
-                            <p class="">{{oki.body|safe}}</p>
-                            <p class="info">{{oki.created_at|naturaltime}}</p>
+                            <article class="media">
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                    {%if oki.created_by.okirprofile.avatar%}
+                                        <img src="{{oki.created_by.okirprofile.avatar.url}}" alt="Profile Picture">
+                                    {%endif%}
+                                    </p>
+                                </figure>
+                                <div class="media-conten">
+                                    <p class="name"><strong>{{oki.created_by.username}}</strong></p>
+                                    <p class="">{{oki.body|safe}}</p>
+                                    <p class="info">{{oki.created_at|naturaltime}}</p>
+                                </div>
+                            </article>
                         </div>
                         <hr>
                     {%endfor%}

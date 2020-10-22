@@ -30,9 +30,20 @@
         {%if okis%}
             {%for oki in okis%}
                 <div class="oki">
-                    <p class="name"><strong>{{oki.created_by.username}}</strong></p>
-                    <p>{{oki.body|safe}}</p>
-                    <p class="is-info is-small">{{oki.created_at|naturaltime}}</p>
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-64x64">
+                            {%if oki.created_by.okirprofile.avatar%}
+                                <img src="{{oki.created_by.okirprofile.avatar.url}}" alt="Profile Picture">
+                            {%endif%}
+                            </p>
+                        </figure>
+                        <div class="media-conten">
+                            <p class="name"><strong>{{oki.created_by.username}}</strong></p>
+                            <p class="">{{oki.body|safe}}</p>
+                            <p class="info">{{oki.created_at|naturaltime}}</p>
+                        </div>
+                    </article>
                 </div>
             {%endfor%}
         {%endif%}
