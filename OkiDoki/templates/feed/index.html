@@ -55,6 +55,10 @@
                     <p class="info">{{oki.created_at|naturaltime}}</p>
                 </div>
             </article>
+            <br>
+            <a @click="OkiDoki({{oki.id}})" v-if="!doki_oki.includes({{ oki.id }})">Doki</a>
+            <span v-if="doki_oki.includes({{ oki.id }})">DiDoki</span>
+            <small id="likes-{{oki.id}}">{{oki.likes.count}}</small>
         </div>
         {%endfor%} {%endif%}
     </div>
@@ -70,10 +74,38 @@
                 body: "",
                 okir: "{{request.user.username}}",
                 created_at: "Now",
-                avatar: {%if request.user.okirprofile.avatar%}"{{request.user.okirprofile.avatar.url}}"{%endif%}
+                avatar: {%if request.user.okirprofile.avatar%}"{{request.user.okirprofile.avatar.url}}"{%endif%},
+                doki_oki: [{%for oki in okis%}{%if oki.liked %}{{oki.id}},{%endif%}{%endfor%}],
             };
         },
         methods: {
+            OkiDoki(oki_id){
+                this.doki_oki.push(parseInt(oki_id));
+                var oki={
+                    'oki_id': oki_id,
+                };
+                {# Send to backend #}
+                {# BUG: innerHTML not wroking #}
+                fetch('{%url "feed:api_add_doki"%}', {
+                    method: "POST",
+                    header: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{csrf_token}}",
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify(oki),
+                })
+                    .then((responce) => {
+                        {# TODO: Remove console.log on production #}
+                        console.log(responce);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+                const el=document.getElementById('like-'+oki_id);
+                const likes = parseInt(el.innerHTML.split(' ')[0]+1);
+                el.innerHTML=likes+'likes'
+            },
             submitOki() {
                 console.log("submitOki");
                 if (this.body.length > 0) {

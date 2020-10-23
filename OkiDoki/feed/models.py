@@ -22,7 +22,7 @@ class Oki(models.Model):
     #     return reverse("",kwargs={'id': self.id})
 
 
-class Like(models.Model):
+class Doki(models.Model):
     oki = models.ForeignKey(Oki, related_name="likes",
                             on_delete=models.CASCADE)
     created_by = models.ForeignKey(

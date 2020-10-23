@@ -2,7 +2,7 @@ import json
 
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from feed.models import Oki, Like
+from feed.models import Oki, Doki
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -20,11 +20,11 @@ def api_add_oki(request):
 
 @login_required
 @csrf_exempt
-def api_add_like(request):
+def api_add_doki(request):
     data = json.loads(request.body)
     oki_id = data['oki_id']
 
-    if not Like.objects.filter(oki_id=oki_id).filter(created_by=request.user).exists():
-        like = Like.objects.create(oki_id=oki_id, created_by=request.user)
+    if not Doki.objects.filter(oki_id=oki_id).filter(created_by=request.user).exists():
+        like = Doki.objects.create(oki_id=oki_id, created_by=request.user)
     json_response = {'success': True}
     return JsonResponse(json_response)
