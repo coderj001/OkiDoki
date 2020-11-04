@@ -4,20 +4,19 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
-django-lint = "*"
 flake8 = "*"
+django-lint = "*"
 faker = "*"
 ipython = "*"
 ipdb = "*"
 werkzeug = "*"
 django-debug-toolbar = "*"
+django-extensions = "*"
+autopep8 = "*"
 
 [packages]
 django = "==3.0.7"
-django-extensions = "*"
 pillow = "*"
-django-ckeditor = "*"
 
 [requires]
 python_version = "3.8"
