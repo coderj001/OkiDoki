@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from core.views import frontpage, signup, logout_user, login_user
 
 app_name = "core"

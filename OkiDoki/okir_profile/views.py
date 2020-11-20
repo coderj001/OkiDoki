@@ -54,9 +54,20 @@ def editprofileview(request):
                                instance=request.user.okirprofile)
         if form.is_valid():
             form.save()
-            return redirect('okirprofile:okirprofile', username=request.user.username)
+            return redirect(
+                'okirprofile:okirprofile',
+                username=request.user.username
+            )
         else:
-            return render(request, 'okirprofile/editprofile.html', {'form': form, 'user': request.user})
+            return render(
+                request,
+                'okirprofile/editprofile.html',
+                {'form': form, 'user': request.user}
+            )
     else:
         form = OkirProfileForm(instance=request.user.okirprofile)
-        return render(request, 'okirprofile/editprofile.html', {'form': form, 'user': request.user})
+        return render(
+            request,
+            'okirprofile/editprofile.html',
+            {'form': form, 'user': request.user}
+        )

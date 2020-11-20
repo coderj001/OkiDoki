@@ -1,9 +1,11 @@
+''' Doc string '''
 import os
 
 BASE_DIR = os.path.join(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))), "..")
 
 TEMP_DIR = os.path.join(BASE_DIR, 'templates')
+
 
 SECRET_KEY = os.environ['secret_key']
 
